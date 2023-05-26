@@ -40,7 +40,7 @@ class BoardsController extends Controller
      */
     public function store( Request $req )
     {
-        // 
+        // 새로운 데이터를 만들기 때문에 새로운 객체를 인스턴스화해서 인서트 
         $boards = new Boards([
                             'title'     =>$req->input('title')
                             ,'content'  => $req->input('content') 
