@@ -15,9 +15,9 @@ return new class extends Migration
     {
         // 패키지 관리자 설치
         // composer require doctrine/dbal
-        Schema::table('boards', function (Blueprint $table){
-            $table->integer('hits')->default(0)->change();
-        });
+        // Schema::table('boards', function (Blueprint $table){
+        //     $table->integer('hits')->default(0)->change();
+        // });
     }
 
     /**

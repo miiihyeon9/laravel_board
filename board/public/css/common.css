@@ -1,0 +1,274 @@
+@import url('https://fonts.googleapis.com/css2?family=DynaPuff&display=swap');
+*
+{
+    text-align: center;
+    margin :0;
+    box-sizing: content-box;
+    color : rgb(255, 192, 203);
+}
+
+body 
+{
+    margin:0;
+    animation: slide 60s linear infinite alternate;
+    background-image: url("https://i.pinimg.com/736x/ef/d7/d9/efd7d98d4ea49ea3c7d7fbf37e74bef5--dark-phone-wallpapers-phones.jpg");
+    background-repeat: repeat;
+  }
+@keyframes slide {
+    to {
+      background-position: 0 50%;
+    }
+  }
+
+h1
+{
+    margin-top: 100px;
+    margin-bottom: 0;
+}
+
+h1 a
+{
+    font-family: 'DynaPuff', cursive;
+    font-size: 100px;
+    font-weight: 900;
+    text-shadow: -3px 0px rgb(255, 192, 203), 0px 3px rgb(255, 192, 203), 3px 0px rgb(255, 192, 203), 0px -3px rgb(255, 192, 203);
+    color: #000;
+} 
+
+h2
+{
+    font-family: 'DynaPuff', cursive;
+    font-size: 60px;
+    font-weight: 900;
+    text-shadow: -3px 0px rgb(255, 192, 203), 0px 3px rgb(255, 192, 203) , 3px 0px rgb(255, 192, 203), 0px -3px rgb(255, 192, 203);
+    color: #000;
+}
+
+/* a
+{
+    text-decoration: none;
+    font-size: 1.2em;
+    font-weight: 900;
+}
+
+
+
+th,td{
+    font-size: 1.2em;
+    padding : 15px;
+    text-align: center;
+}
+
+.table_col
+{
+    border-bottom : 2px solid rgb(255, 192, 203);
+}
+
+tbody
+{
+    background-color : rgba(0,0,0,0.2);
+}
+
+
+.listBox
+{
+    margin-top : 100px;
+    width:800px;
+    border-radius:10px;
+    border : 2px solid rgb(255,192,203);
+    position : relative;
+    margin : 0 auto;
+}
+
+
+.table
+{
+    font-family: 'Do Hyeon', sans-serif;
+    width:100%;
+    border-collapse: collapse;
+    line-height: 30px;
+    box-sizing: border-box;
+    margin : 0 auto ;
+    position: relative;
+    border-style: hidden;
+}
+
+.writeBtn
+{
+    position : absolute;
+    top : -50px;
+    padding :5px 10px;
+    right:0;
+    border:2px solid rgb(255, 192, 203);
+    background-color: rgba(0, 0, 0,0.5);
+    border-radius: 5px;
+    width : 75px;
+}
+
+
+form{
+  font-family: 'Do Hyeon', sans-serif; */
+    width : 600px;
+    height : 400px;
+    box-sizing: border-box;
+    margin : 50px auto;
+    border : 2px solid rgb(255, 192, 203);
+    border-radius: 20px;
+    background-color : rgba(0,0,0,0.5);
+    display: grid; 
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr 5fr 1fr;
+    grid-row-gap: 20px;
+    padding : 40px;
+}
+
+
+button
+{
+    width : 80px;
+    height: 40px;
+    margin : 0 auto;
+    border : 3px solid rgb(255, 192, 203);
+    background-color : rgba(0,0,0,0.3);
+    border-radius: 20px;
+    font-weight: 900;
+    font-size: 1.1em;
+    color : rgb(255, 192, 203);
+}
+/*
+.listBox
+{
+    margin-top : 50px;
+    width:600px;
+    border-radius:10px;
+    border : 2px solid rgb(255,192,203);
+    position : relative;
+    width:600px;
+    margin : 0 auto;
+}
+.table
+{
+    font-family: 'Do Hyeon', sans-serif;
+    width:100%;
+    border-collapse: collapse;
+    line-height: 30px;
+    box-sizing: border-box;
+    margin : 0 auto ;
+    position: relative;
+    border-style: hidden;
+}
+
+
+
+.write
+{
+    position : absolute;
+    top : -50px;
+    padding :5px 10px;
+    right:0;
+    border:2px solid rgb(255, 192, 203);
+    background-color: rgba(0, 0, 0,0.5);
+    border-radius: 5px;
+    width : 75px;
+}
+
+.title
+{
+    color : #000;
+}
+
+
+.page_list
+{
+    display: inline-block;
+    width : 30px;
+    height : 30px;
+    background-color: rgba(0,0,0,0.3);
+    border : 2px solid rgb(255, 192, 203);
+    border-radius: 5px;
+    margin : 20px 5px 20px 5px;
+    
+}
+
+
+.list
+{
+    color : rgb(255, 192, 203);
+}
+.table_list
+{
+    font-size: 19.2px;
+    font-weight: 400;
+    color :rgb(255, 192, 203) ;
+}
+
+.write_link
+{
+    color : rgb(255, 192, 203);
+    font-family: 'Do Hyeon', sans-serif;
+    font-size: 18px;
+}
+ */
+
+
+
+
+
+
+
+
+ input,textarea
+ {
+     font-family: 'Do Hyeon', sans-serif;
+     color :rgb(255, 192, 203);
+     font-size: 25px;
+     background-color :transparent ;
+     border: 2px solid rgb(255, 192, 203);
+     border-radius: 20px;
+ }
+ 
+ input:focus
+ {
+     border:3px solid rgb(255, 192, 203); 
+     border-radius: 20px;
+     outline:none;
+ }
+ 
+ textarea:focus{
+     border:3px solid rgb(255, 192, 203); 
+     border-radius: 20px;
+     outline:none;
+ } 
+ 
+ 
+ .contentsWrite::-webkit-scrollbar {
+     width:3px;
+ }
+ 
+ .contentsWrite::-webkit-scrollbar-track
+ {
+     background-color: transparent;
+ }
+ .contentsWrite::-webkit-scrollbar-thumb {
+     border-radius: 4px;
+     background-color: rgb(255, 192, 203);
+ }
+ 
+ .contentsWrite::-webkit-scrollbar-button {
+     width: 0;
+     height: 0;
+ }
+
+button:hover
+{
+    background-color: #000;
+}
+.page_list:hover
+{
+    background-color: rgba(0,0,0,0.5);
+}
+
+.board_list_row:hover
+{
+    background-color: rgba(0, 0, 0,0.3);
+}

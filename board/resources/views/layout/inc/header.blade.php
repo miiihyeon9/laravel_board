@@ -1,0 +1,1 @@
+<h1><a class= "title" href="{{route('boards.index')}}">MINI BOARD</a></h1>

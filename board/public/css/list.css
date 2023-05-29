@@ -1,0 +1,116 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap');
+
+
+a
+{
+    text-decoration: none;
+    font-size: 1.2em;
+    font-weight: 900;
+    position :relative;
+}
+
+
+th,td{
+    font-size: 1.2em;
+    /* border : 2px solid rgb(255, 192, 203); */
+    padding : 15px;
+    color : rgb(255, 192, 203);
+}
+
+.table_col
+{
+    border-bottom : 2px solid rgb(255, 192, 203);
+}
+
+tbody
+{
+    background-color : rgba(0,0,0,0.2);
+}
+
+.list_box
+{
+    margin-top : 50px;
+    width:600px;
+    border-radius:10px;
+    border : 2px solid rgb(255,192,203);
+    position : relative;
+    width:600px;
+    margin : 0 auto;
+}
+table
+{
+    font-family: 'Do Hyeon', sans-serif;
+    width:100%;
+    border-collapse: collapse;
+    line-height: 30px;
+    box-sizing: border-box;
+    margin : 0 auto ;
+    position: relative;
+    border-style: hidden;
+}
+
+
+
+.write
+{
+    position : absolute;
+    top : -50px;
+    padding :5px 10px;
+    right:0;
+    border:2px solid rgb(255, 192, 203);
+    background-color: rgba(0, 0, 0,0.5);
+    border-radius: 5px;
+    width : 75px;
+}
+
+.title
+{
+    color : #000;
+}
+.page_list
+{
+    display: inline-block;
+    width : 30px;
+    height : 30px;
+    background-color: rgba(0,0,0,0.3);
+    border : 2px solid rgb(255, 192, 203);
+    border-radius: 5px;
+    margin : 20px 5px 20px 5px;
+    
+}
+
+
+.list
+{
+    color : rgb(255, 192, 203);
+}
+.table_list
+{
+    font-size: 19.2px;
+    font-weight: 400;
+    color :rgb(255, 192, 203) ;
+}
+
+.write_link
+{
+    color : rgb(255, 192, 203);
+    font-family: 'Do Hyeon', sans-serif;
+    font-size: 18px;
+}
+
+
+
+button:hover
+{
+    background-color: #000;
+}
+.page_list:hover
+{
+    background-color: rgba(0,0,0,0.5);
+}
+
+.board_list_row:hover
+{
+    background-color: rgba(0, 0, 0,0.3);
+}

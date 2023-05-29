@@ -1,12 +1,12 @@
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
+@extends('layout.layout')
+
+@section('layout')
+<link rel="stylesheet" href="{{asset('css/update.css')}}">
+@endsection
+
+@section('contents')
+<main>
+    <button type="button" class="mian_button_2" onclick="location.href='{{route('boards.index')}}'">뒤로 가...</button>
     <form action="{{route('boards.update',['board' => $data->id])}}" method="post" >
         @csrf
         @method('put')
@@ -19,5 +19,7 @@
         <button type="submit">수정</button>
         <button type="button" onclick="location.href='{{route('boards.show', ['board' => $data->id])}}'">취소</button>
     </form>
-</body>
-</html>
+</main>
+@endsection
+
+

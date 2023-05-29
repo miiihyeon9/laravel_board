@@ -1,0 +1,120 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap');
+header
+{
+    position :relative;
+}
+
+form
+{
+    font-family: 'Do Hyeon', sans-serif;
+    width : 600px;
+    height : 400px;
+    box-sizing: border-box;
+    margin : 50px auto;
+    border : 2px solid rgb(255, 192, 203);
+    border-radius: 20px;
+    background-color : rgba(0,0,0,0.5);
+    display: grid; 
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr 5fr 1fr;
+    grid-row-gap: 20px;
+    padding : 40px;
+}
+
+label
+{
+    font-family: 'Do Hyeon', sans-serif;
+    color : rgb(255, 192, 203);
+    font-size: 25px;
+    height: 30px;
+    align-self: center;
+    
+}
+
+textarea{
+    width:250px;
+    height:200px;
+    resize:none;
+}
+
+input
+{
+    width:250px;
+}
+
+
+
+button
+{
+    width : 80px;
+    height: 40px;
+    margin : 0 auto;
+    border : 3px solid rgb(255, 192, 203);
+    background-color : rgba(0,0,0,0.3);
+    border-radius: 20px;
+    font-weight: 900;
+    font-size: 1.1em;
+    color : rgb(255, 192, 203);
+}
+
+a
+{
+    color : rgb(255, 192, 203);
+    font-weight: 900;
+    text-decoration: none;
+}
+
+form
+{
+    position: relative;
+}
+
+.list_button
+{
+    position : absolute;
+    top :-50px ;
+    left : 0;
+}
+
+input,textarea
+{
+    font-family: 'Do Hyeon', sans-serif;
+    color :rgb(255, 192, 203);
+    font-size: 25px;
+    background-color :transparent ;
+    border: 2px solid rgb(255, 192, 203);
+    border-radius: 20px;
+}
+
+input:focus
+{
+    border:3px solid rgb(255, 192, 203); 
+    border-radius: 20px;
+    outline:none;
+}
+
+textarea:focus{
+    border:3px solid rgb(255, 192, 203); 
+    border-radius: 20px;
+    outline:none;
+} 
+
+
+.contentsWrite::-webkit-scrollbar {
+    width:3px;
+}
+
+.contentsWrite::-webkit-scrollbar-track
+{
+    background-color: transparent;
+}
+.contentsWrite::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    background-color: rgb(255, 192, 203);
+}
+
+.contentsWrite::-webkit-scrollbar-button {
+    width: 0;
+    height: 0;
+}

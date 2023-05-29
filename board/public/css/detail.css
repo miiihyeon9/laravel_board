@@ -1,0 +1,132 @@
+@import url('https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap');
+
+a
+{
+    text-decoration: none;
+    font-size: 1.2em;
+    font-weight: 900;
+    position :relative;
+}
+
+
+header
+{
+    position :relative;
+}
+
+main
+{
+    font-family: 'Do Hyeon', sans-serif;
+    width : 600px;
+    height : 400px;
+    box-sizing: border-box;
+    margin : 50px auto;
+    border : 2px solid rgb(255, 192, 203);  
+    border-radius: 20px;
+    background-color : rgba(0,0,0,0.5);
+    font-size: 1.3em;
+    color : rgb(255,192,203);
+    position : relative;
+}
+
+button
+{
+    width : 80px;
+    height: 40px;
+    margin : 0 auto;
+    border : 3px solid rgb(255, 192, 203);
+    background-color : rgba(0,0,0,0.3);
+    border-radius: 20px;
+    font-size: 1.1em;
+    color : rgb(255, 192, 203);
+    text-decoration: none;
+    font-size : 18px;
+    font-family: 'Do Hyeon', sans-serif;
+
+}
+
+#list_container{
+    font-size: 1.2em;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr;
+    grid-row-gap: 20px;
+}
+
+div
+{
+    height: 50px;
+    /* width : 250px;
+    margin : 0 auto; */
+}
+
+main a 
+{
+    color: rgb(255, 192, 203);
+}
+
+
+.main_button_1 {
+    position : absolute;
+    bottom : 10px;
+    left: 150px;
+}
+
+.main_button_2
+{
+    position : absolute;
+    bottom : 10px;
+    right : 150px;
+}
+
+.board_number{
+    margin-top: 20px;
+}
+
+.contents_write{
+    height : 100px;
+    overflow:auto;
+}
+
+
+button:hover
+{
+    background-color: #000;
+}
+
+textarea{
+font-family: 'Do Hyeon', sans-serif;
+width:250px;
+margin:0 auto;
+color :rgb(255, 192, 203);
+font-size: 25px;
+background-color :transparent ;
+border: 2px solid rgb(255, 192, 203);
+resize:none;
+border-radius: 20px;
+}
+
+
+
+textarea:focus{
+    border:3px solid rgb(255, 192, 203); 
+    outline:none;
+}
+
+.contents_write::-webkit-scrollbar {
+    width:3px;
+}
+
+.contents_write::-webkit-scrollbar-track
+{
+    background-color: transparent;
+}
+.contents_write::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    background-color: rgb(255, 192, 203);
+}
+
+.contents_write::-webkit-scrollbar-button {
+    width: 0;
+    height: 0;
+}
