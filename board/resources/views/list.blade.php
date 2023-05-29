@@ -30,6 +30,10 @@
                 </tbody>
                 @endforelse
             </table>
+            {{-- <form action="" method="get">
+                <input type="search">
+                <button type="submit">검색</button>
+            </form> --}}
         </div>
     @endsection
 </body>

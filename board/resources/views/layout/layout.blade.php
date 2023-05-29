@@ -10,9 +10,6 @@
     {{-- 왜 적용이 안되는거니...왜그러니... 알고보니 public파일에 넣었어야 했음--}}
     <link href="{{asset('css/common.css')}}" rel="stylesheet" >
     {{-- <link href="{{mix.postCss('resources/css/common.css', 'public/css');}}" rel="stylesheet" > --}}
-    @section('layout')
-    <link rel="stylesheet" href="{{asset('css/list.css')}}">
-    @show
 
     
 
