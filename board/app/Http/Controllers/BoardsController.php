@@ -1,10 +1,16 @@
 <?php
-
+/*************************************
+ * 프로젝트명 : laravel_board
+ * 디렉토리 : cotroller
+ * 파일명 : BoardsController.php
+ * 이력 : v001 0526 MH.KIM new
+ *        v002 0530 MH.KIM 유효성 검사
+ * ************************************ */
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Boards;
-
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
  
 class BoardsController extends Controller
@@ -27,7 +33,6 @@ class BoardsController extends Controller
      */
     public function create()
     {
-        //
         return view('write');
     }
 
@@ -37,8 +42,30 @@ class BoardsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store( Request $req )
+
+    //store() => 새로운 게시글 insert하는 메소드
+    public function store( Request $req )   // post
     {
+        // v002 add start
+        // 결과를 담을 변수 선언
+        $req->validate([
+            // 유저한테 받아야 할 값 배열로 생성
+            // 필수일 경우 'required'
+            // 조건을 추가할 경우 | 
+            // 최소 최대 하는 방법 => min,max 사용하거나, between 사용
+            // 유효성 검사 
+            // title => 필수항목, 3~30글자 
+            'title'     =>  'required|between:3,30'
+            // content => 필수항목, 최대 1000글자 
+            ,'content'  =>  'required|max:1000'
+        ]);
+
+        // 에러가 나면 변수에 error를 생성해줌
+
+        // v002 add end
+
+
+        // 유효성 검증은 프론트, 백엔드 둘 다 해줘야 함 
         // 새로운 데이터를 만들기 때문에 새로운 객체를 인스턴스화해서 인서트 
         $boards = new Boards([
                             'title'     =>$req->input('title')
@@ -95,9 +122,9 @@ class BoardsController extends Controller
         // $result = $request->all();  // 값을 받아온거 포스트로 보낸 값을 가져온 거고 
         // var_dump($result);
         // $update = DB::update('update boards set title = ? , content = ? where id = ?', [$result['title'], $result['content'], $boards->id]);    // 업데이트하고
-        DB::update('update boards set title = :title , content = :content , updated_at = NOW() where id = :id', ['title'  => $request->title,'content' => $request->content,'id' => $id]);
+        // DB::update('update boards set title = :title , content = :content , updated_at = NOW() where id = :id', ['title'  => $request->title,'content' => $request->content,'id' => $id]);
         // DB::table('Boards')->where('id',$id)->update(['title'=>$request->input('title'),'content'=>$request->input('content')]);
-        DB::table('Boards')->where('id',$id)->update(['title'=>$request->title,'content'=>$request->content]);
+        // DB::table('Boards')->where('id',$id)->update(['title'=>$request->title,'content'=>$request->content]);
 
         // $boards = Boards::find( $id ); // 다시 가져와서
         // $boards->save();    // 저장하고
@@ -109,8 +136,57 @@ class BoardsController extends Controller
         //ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ모델 객체를 사용했느냐 안했느냐에 따라 ORM사용여부
         // DB 를 사용한다 => ORM이 아님
         // 모델 객체를 사용한다 => ORM을 사용했다. 
-        //! ORM 사용
 
+        // $arr = ['id' => $id ];
+        // $requestResult = $request->all(); // array token, method, title, content
+
+        // var_dump($requestResult);
+        // $merged = $arr->merge($requestResult['id']);
+        // $merged->all();
+        // var_dump($merged);
+        // $requestResult = $request->all();
+        // $requestResult['id'] = $arr['id'];
+        // var_dump($request);
+
+        //ID를 리퀘스트 객체에 머지
+        //! v002 add start
+        //* 1번째 방법
+        $arr = ['id' => $id ];
+        //$request 객체 안에 $arr을 넣는다 merge()자체가 현재 request의 input 배열에 새로운 배열을 합치는 거
+        $request->merge($arr);
+        //! v002 add end
+        //* 2번째 방법
+        // $request->request->add($arr);
+
+        // $request->request['id']=$arr['id'];
+
+        
+        
+        //! v002 add start
+        // $request->validate([
+        //     'id'        => 'required|integer'
+        //     ,'title'     =>  'required|between:3,30'
+        //     ,'content'  =>  'required|max:1000'
+        // ]);
+        //! v002 add end
+
+        //* 유효성 검사 2
+        // 바로 리턴 안하고 validator에 정보를 담음 
+        $validator = Validator::make(
+            $request->only('id','title','content')
+        ,[
+            'id'        => 'required|integer'
+            ,'title'     =>  'required|between:3,30'
+            ,'content'  =>  'required|max:2000'
+        ]);
+        //fails() : 실패했을 경우 boolean으로 나옴
+        if($validator->fails()){
+            // 요청했던 페이지로 다시 이동 => edit페이지로 다시 이동 
+            // withErrors () : 에러를 가져옴 
+            // withInput() : 우리가 받은 request를 session에 등록하고 session을 가져옴 
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+        //! ORM 사용
         $result = Boards::find($id);
         $result->title = $request->title;
         $result->content = $request->content;
@@ -124,11 +200,13 @@ class BoardsController extends Controller
         // url이 같을 때 => method를 보고 판단함
         // put이면 기존 데이터 업데이트. // delete면 기존 데이터 삭제 // get이면 기존데이터 보여줌.
 
-
+        
         // return redirect('/boards/'.$id);
         return redirect()->route('boards.show',['board' => $id]);
         
         // 겉으로 봐서는 똑같지만 사실상 다름.   
+
+
     }
 
     /**
