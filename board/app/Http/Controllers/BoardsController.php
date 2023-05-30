@@ -47,13 +47,13 @@ class BoardsController extends Controller
     public function store( Request $req )   // post
     {
         // v002 add start
+        // !유효성 검사 
         // 결과를 담을 변수 선언
         $req->validate([
             // 유저한테 받아야 할 값 배열로 생성
             // 필수일 경우 'required'
             // 조건을 추가할 경우 | 
             // 최소 최대 하는 방법 => min,max 사용하거나, between 사용
-            // 유효성 검사 
             // title => 필수항목, 3~30글자 
             'title'     =>  'required|between:3,30'
             // content => 필수항목, 최대 1000글자 
@@ -151,8 +151,9 @@ class BoardsController extends Controller
         //ID를 리퀘스트 객체에 머지
         //! v002 add start
         //* 1번째 방법
+        // $request를 보면 처음에 'id'값이 없기 때문에 id를 넣어줘야함 
         $arr = ['id' => $id ];
-        //$request 객체 안에 $arr을 넣는다 merge()자체가 현재 request의 input 배열에 새로운 배열을 합치는 거
+        //$request 객체 안에 $arr을 넣는다 merge()자체가 현재 request의 input 배열에 ($arr)을 합치는 거
         $request->merge($arr);
         //! v002 add end
         //* 2번째 방법
@@ -174,6 +175,7 @@ class BoardsController extends Controller
         // 바로 리턴 안하고 validator에 정보를 담음 
         $validator = Validator::make(
             $request->only('id','title','content')
+            // 유효성 검사 
         ,[
             'id'        => 'required|integer'
             ,'title'     =>  'required|between:3,30'
@@ -182,7 +184,7 @@ class BoardsController extends Controller
         //fails() : 실패했을 경우 boolean으로 나옴
         if($validator->fails()){
             // 요청했던 페이지로 다시 이동 => edit페이지로 다시 이동 
-            // withErrors () : 에러를 가져옴 
+            // withErrors () : 세션에 에러메시지를 플래시함. 뷰에 old()메서드를 사용해서 오류메세지를 쉽게 출력할 수 있음 
             // withInput() : 우리가 받은 request를 session에 등록하고 session을 가져옴 
             return redirect()->back()->withErrors($validator)->withInput();
         }

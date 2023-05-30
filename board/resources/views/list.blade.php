@@ -34,6 +34,10 @@
                 <input type="search">
                 <button type="submit">검색</button>
             </form> --}}
+            {{-- <form action="{{route('users.logout.post')}}" method="post">
+            @csrf
+                <button type="submit">로그아웃</button>
+            </form>  --}}
         </div>
     @endsection
 </body>

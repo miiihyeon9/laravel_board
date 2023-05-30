@@ -22,6 +22,7 @@ class UserController extends Controller
     }
 
     function loginpost(Request $request){
+        // 유효성 검사 
         $request->validate([
             'email'    => 'required|email|max:100'
                                                           //한글자 이상의 영어, 특수문자, 숫자(필수)를 8~20자
@@ -31,10 +32,15 @@ class UserController extends Controller
         // 유저 정보 습득 
         // email이 request->email과 일치한 첫번째 데이터를 가져오겠다. 
         $user = Users::where('email',$request->email)->first();
+        // $user가 존재하지 않거나, 비밀번호가 일치하지 않을 경우
+        // (Hash::check($request->password, $user->password) : 해시화된 비밀번호와 요청된 비밀번호 체크
         if(!$user || !(Hash::check($request->password, $user->password))){
             $errors[] = '아이디와 비밀번호를 확인해 주세요.';
             return redirect()
                     ->back()
+                    // Illuminate\Support\Collection 클래스는 배열 데이터를 사용하기 위한 유연하고 편리한 래퍼(wrapper)를 제공
+                    // collect 헬퍼를 사용하면 배열에서 새로운 컬렉션 인스턴스를 생성하고
+                    
                     ->with('errors',collect($errors));
         }
         // 유저 인증 작업
@@ -67,6 +73,7 @@ class UserController extends Controller
         $data['name']   = $request->name;
         // 둘 다 똑같음 
         $data['email']  = $request->input('email');
+        // 패스워드 해시화
         $data['password'] = Hash::make($request->password);
 
         $user = Users::create($data);   // 인서트 
@@ -84,6 +91,9 @@ class UserController extends Controller
                 ->with('success','회원가입을 완료했습니다.<br>가입하신 아이디와 비밀번호로 로그인을 해 주세요.');
     }
 
-
+    // function logoutpost(){
+    //     Auth::logoutOtherDevices($currentPassword);
+    //     return redirect()->route('users.login');
+    // }
 }
 
