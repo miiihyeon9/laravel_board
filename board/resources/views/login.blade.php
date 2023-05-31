@@ -4,12 +4,11 @@
 
 @section('contents')
     <h2>Login</h2>
-        @if(isset($success))
-        <div>{{$success}}</div>
-        @else
-        <div>{{""}}</div>
-        @endif
+        
     @include('layout.errors_validate')
+    {{-- session()->has('success') => session에 success가 있을 경우에 true --}}
+    <div>{!! session()->has('success') ? session('success') : "" !!}</div>
+    <a href="{{route('users.findpassword')}}">비밀번호 찾기</a>
     <form action="{{route('users.login.post')}}" method="post">
         @csrf
         <label for="email">EMAIL : </label>

@@ -145,4 +145,22 @@ Route::get('/users/login',[UserController::class,'login'])->name('users.login');
 Route::post('/users/loginpost',[UserController::class,'loginpost'])->name('users.login.post');
 Route::get('/users/registration',[UserController::class,'registration'])->name('users.registration');
 Route::post('/users/registrationpost',[UserController::class,'registrationpost'])->name('users.registration.post');
-// Route::post('/users/logoutpost',[UserController::class,'logoutpost'])->name('users.logout.post');
+Route::get('/users/logout',[UserController::class,'logout'])->name('users.logout');
+Route::get('/users/withdraw',[UserController::class,'withdraw'])->name('users.withdraw');
+
+Route::get('/users/edit',[UserController::class,'edit'])->name('users.edit');
+Route::put('/users/editput',[UserController::class,'editput'])->name('users.edit.put');
+
+// 회원정보 페이지에 비밀번호 입력하고 들어가기 
+Route::get('/users/check',[UserController::class,'check'])->name('users.check');
+Route::post('/users/checkpost',[UserController::class,'checkpost'])->name('users.check.post');
+
+Route::get('/users/findpassword',[UserController::class,'findpassword'])->name('users.findpassword');
+Route::post('/users/findpasswordpost',[UserController::class,'findpasswordpost'])->name('users.findpassword.post');
+
+// 비밀번호 찾기 했을 때 인증번호 페이지 
+Route::get('/users/randompassword',[UserController::class,'randompassword'])->name('users.randompassword');
+
+
+
+// 비밀번호 찾기, 아이디 찾기 , 비밀번호 초기화되고 로그인했을 때 비밀번호 찾기페이지 이동 

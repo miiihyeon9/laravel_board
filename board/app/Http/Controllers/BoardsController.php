@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 use App\Models\Boards;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
+use App\Models\Users;
  
 class BoardsController extends Controller
 {
@@ -22,7 +23,15 @@ class BoardsController extends Controller
      */
     public function index()
     {
+        //! 로그인 체크 (로그인 안했을 경우 boards 페이지 들어오는 거 막음)
+        // 페이지에 들어온 사람이 guest(비로그인)일 경우 true
+        if(auth()->guest()){
+            return redirect()->route('users.login');
+        }
+        // var_dump(session()->all());
+        // var_dump(session('id'));
         $result = Boards::select(['id','title','hits','created_at','updated_at'])->orderBy('hits','desc')->get();
+        // $user = Users::select(['id','email','password','created_at','updated_at'])->where('id','=',session('id'))->get();
         return view('list')->with('data',$result);
     }
 
@@ -33,6 +42,9 @@ class BoardsController extends Controller
      */
     public function create()
     {
+        if(auth()->guest()){
+            return redirect()->route('users.login');
+        }
         return view('write');
     }
 
@@ -46,6 +58,10 @@ class BoardsController extends Controller
     //store() => 새로운 게시글 insert하는 메소드
     public function store( Request $req )   // post
     {
+        if(auth()->guest()){
+            return redirect()->route('users.login');
+        }
+        
         // v002 add start
         // !유효성 검사 
         // 결과를 담을 변수 선언
@@ -81,8 +97,12 @@ class BoardsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
     public function show( $id )   //detail
     {
+        if(auth()->guest()){
+            return redirect()->route('users.login');
+        }
         $boards = Boards::find( $id ); //   기존 값 가져오고
         $boards->hits++;    //  조회수 1 증가하고
         $boards->save();    // 업데이트 완료
@@ -102,6 +122,9 @@ class BoardsController extends Controller
      */
     public function edit( $id )   //edit GET
     {
+        if(auth()->guest()){
+            return redirect()->route('users.login');
+        }
         $boards = Boards::find( $id ); //  
         return view('edit')->with('data',$boards);
     }
@@ -115,6 +138,9 @@ class BoardsController extends Controller
      */
     public function update(Request $request, $id)
     {
+        if(auth()->guest()){
+            return redirect()->route('users.login');
+        }
 
 
         
@@ -219,6 +245,9 @@ class BoardsController extends Controller
      */
     public function destroy($id)
     {
+        if(auth()->guest()){
+            return redirect()->route('users.login');
+        }
         // $delete = DB::delete('delete from boards where id = :id',['id' => $id] );
         // $id->delete();
         // $boards = Boards::find( $id );
@@ -240,4 +269,6 @@ class BoardsController extends Controller
         
         return redirect('/boards');
     }
+
+
 }
