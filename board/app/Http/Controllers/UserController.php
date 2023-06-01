@@ -32,6 +32,7 @@ class UserController extends Controller
         Auth::login($user);// 알아서 토큰이나 세션을 넣어줌 
         if(Auth::check()){
             session($user->only('id')); // 세션에 인증된 회원 pk 등록
+            
             if($user->password_flg === '1'){
                     return redirect()->route('users.edit');
                 } 
@@ -42,9 +43,7 @@ class UserController extends Controller
                 //한글자 이상의 영어, 특수문자, 숫자(필수)를 8~20자
                 ,'password' => 'required|regex:/^(?=.*[a-zA-Z])(?=.*[!@#$%^*-])(?=.*[0-9]).{8,20}$/'
             ]);
-            
-            // !유저 정보 습득(원래 있던 자리 )
-            
+
         // email이 request->email과 일치한 첫번째 데이터를 가져오겠다. 
         // $user가 존재하지 않거나, 비밀번호가 일치하지 않을 경우
         // (Hash::check($request->password, $user->password) : 해시화된 비밀번호와 요청된 비밀번호 체크
@@ -202,8 +201,8 @@ class UserController extends Controller
             $baseUsers->$val = $request->$val;
         }
 
-        if($baseUser->password_flg === '1'){
-            $baseUser->password_flg ='0';
+        if($baseUsers->password_flg === '1'){
+            $baseUsers->password_flg ='0';
         }
         $baseUsers->save(); // update
 

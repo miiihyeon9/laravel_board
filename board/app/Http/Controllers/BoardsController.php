@@ -266,7 +266,6 @@ class BoardsController extends Controller
         // destroy는 PK를 받아야함. delete는 객체를 먼저 만들고 delete를 체이닝 해서 써야함 왜냐하면 인수가 없기 때문
         // 엘로퀀트를 사용하지 않고 delete할 경우 레코드가 사라짐 
 
-        
         return redirect('/boards');
     }
 
