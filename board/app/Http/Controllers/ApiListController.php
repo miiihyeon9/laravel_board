@@ -62,11 +62,9 @@ class ApiListController extends Controller
                 ,'title'    =>  'required|between:3,30'
                 ,'content'  =>  'required|max:1000'
             ]);
-            
+
             if ($validator->fails()) {
-
                 return response()->json(['errors'=>$validator->messages()],Response::HTTP_UNPROCESSABLE_ENTITY);
-
             } else {
                 $boards = Boards::find($id);
                 $boards->title = $request->title;
@@ -130,19 +128,14 @@ class ApiListController extends Controller
         // $result['msg'] ='success';
         // // return $result;
         // return response()->json($result,Response::HTTP_OK);
-
-
-
         $arrData=[
             'code'  => '0'
             ,'msg'  => 'success'
         ];
         $data['id'] =  $id;
-
         $validator = Validator::make($data,[
             'id'=> 'required|integer|exists:boards,id'
         ]);
-
         if($validator->fails()){
             $arrData['code'] = 'E01';
             $arrData['msg'] = 'Error';
@@ -158,9 +151,6 @@ class ApiListController extends Controller
             }
         }
         return $arrData;
-
-
-        
     }
 
 }
