@@ -11,6 +11,7 @@ class ApiListController extends Controller
     function getlist($id){
         $boards = Boards::find($id);
         return response()->json([$boards],200);
+        // response() html형태로  reponse 
     //json은 우리가 가지고 있는 데이터를 외부에 보내는 것이기 때문에 필요한 데이터만 보내주어야 함
     }
 
@@ -48,7 +49,7 @@ class ApiListController extends Controller
             //     ,'title'     =>  'required|between:3,30'
             //     ,'content'  =>  'required|max:2000'
             // ]);
-            
+
             // $request->validate([
                 // 'id'        => 'required|integer'    
 
@@ -70,11 +71,11 @@ class ApiListController extends Controller
                 $boards->title = $request->title;
                 $boards->content = $request->content;
                 $boards->save();
-                
+
                 $result['errorcode'] = '0';
                 $result['msg'] = 'success';
                 $result['data'] = $boards->only('id','title','content');
-                
+
                 return response()->json($result,Response::HTTP_OK);
                 // return $result;
             }
@@ -117,7 +118,7 @@ class ApiListController extends Controller
             //     $arrData['code'] = '0';
             //     $arrData['msg'] = 'Update Completed';
             //     return $arrData;
-            
+
             // }
 
         }

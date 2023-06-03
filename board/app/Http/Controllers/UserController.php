@@ -314,6 +314,26 @@ class UserController extends Controller
         // var_dump($randompassword);
         return view('randompassword');
     }
-    // !회원정보 페이지에 비밀번호 입력하고 들어가기
+    
 
+    // function joinquery(Request $request){
+         // *쿼리를 직접 전달하는 방식 
+    //     DB::statement('drop table users');
+
+    //     //* SELECT 쿼리를 직접 전달하고 파라미터를 바인딩하는 호출 방식 
+    //     DB::select('select * from users where email = ?' ,[$request->email]);
+
+    //     //* 체이닝 방법을 사용하여 데이터 조회
+    //     DB::table('users')->get();
+
+    //     //* 다른 테이블과의 join구문을 체이닝으로 호출 
+    //     DB::table('users')->join('boards',function($join){
+    //         $join->on('users.id','=','boards.user_id')
+    //         ->where('조건');
+    //     })->get();
+    // }
+    // select,insert,update,delete를 써주는게 좋음 
+    // update, delete는 쿼리를 실행한 후 영향을 받은 레코드 개수를 반환함. 
+    
+    
 }
