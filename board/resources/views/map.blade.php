@@ -7,9 +7,11 @@
     <title>Document</title>
 </head>
 <body>
-    <div id="map" style="width:500px;height:400px;"></div>
+    <div id="map" style="width:80%;height:500px;"></div>
     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=e75507660171866240a16fe7aa161adc"></script>
     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=e75507660171866240a16fe7aa161adc&libraries=services,clusterer,drawing"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script type="text/javascript" src="{{asset('js/map.js')}}"></script>
+    <script type="module" src="{{asset('js/crawling.js')}}"></script>
 </body>
 </html>

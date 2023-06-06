@@ -15,8 +15,9 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Str;
-
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Log;
+use App\Mail\OrderShipped;
 
 class UserController extends Controller
 {
@@ -120,6 +121,12 @@ class UserController extends Controller
                     ->with('error',$error);
         } 
 
+
+        $order = Users::findOrFail($request->email);
+
+        // Ship the order...
+
+        Mail::to($request->user())->send(new OrderShipped($user));
         // 회원가입 완료 로그인 페이지 이동
         return redirect()
                 ->route('users.login')
