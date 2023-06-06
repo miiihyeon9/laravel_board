@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BoardsController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\RoomController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -164,3 +165,7 @@ Route::get('/users/randompassword',[UserController::class,'randompassword'])->na
 
 
 // 비밀번호 찾기, 아이디 찾기 , 비밀번호 초기화되고 로그인했을 때 비밀번호 찾기페이지 이동 
+
+
+
+Route::get('rooms/detail',[RoomController::class,'index'])->name('rooms.index');
