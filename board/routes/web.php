@@ -5,6 +5,7 @@ use App\Http\Controllers\BoardsController;
 use App\Http\Controllers\RoomController;
 use App\Http\Controllers\TestsController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\RoomController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes

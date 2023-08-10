@@ -15,12 +15,34 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Str;
-use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Log;
+use App\Mail\OrderShipped;
+
 class UserController extends Controller
 {
     // ! 데이터베이스가 갱신이 되는 부분은 뒤로가기 막는게 좋음
-    //
+    // redirect()->with() : session에 등록
+
+    // view()->with() : 변수로 사용 가능 
+    // !redirect와 view의 차이
+    // redirect와 view는 요청을 하냐 안하냐의 차이 
+    // redirect()는 url를 변경시키는 함수
+    // view()는 특정 url 요청이 들어왔을 때, 특정 view페이지를 반환해서 화면에 띄워주고 싶을 때 사용
+
+    // 
     function login(){
+        // 배포 할 경우에는 warning이상만 경고
+        // $arr['key'] ='test';
+        // $arr['kim'] = 'park';
+        // Log::emergency('emergency',$arr);
+        // Log::alert('alert',$arr);
+        // Log::critical('critical',$arr);
+        // Log::error('error',$arr);
+        // Log::warning('warning',$arr);   // 서비스할 때는 warning까지만
+        // Log::notice('notice',$arr);
+        // Log::info('info',$arr);
+        // Log::debug('debug',$arr);   // 개발할 때는 Log::로 확인
         
         return view('login');
     }
@@ -53,7 +75,6 @@ class UserController extends Controller
                     ->back()
                     // Illuminate\Support\Collection 클래스는 배열 데이터를 사용하기 위한 유연하고 편리한 래퍼(wrapper)를 제공
                     // collect 헬퍼를 사용하면 배열에서 새로운 컬렉션 인스턴스를 생성하고
-                    
                     ->with('error',$error);
         }
 
@@ -61,6 +82,8 @@ class UserController extends Controller
 
 
             //intended()는 완전 새로운 redirect이기 때문에 필요없는 데이터는 모두 정리해줌 
+
+            // 유저 인증 작업을 완료하고 원래 접속하려고한 url에 접속하게 해주고 만약에 실패할 경우 intended()에 있는 url로 이동
             return redirect()->intended(route('boards.index'));
         }else{
             $error = '유저 인증 작업 에러. 잠시 후에 다시 입력해 주세요';
@@ -98,6 +121,12 @@ class UserController extends Controller
                     ->with('error',$error);
         } 
 
+
+        $order = Users::findOrFail($request->email);
+
+        // Ship the order...
+
+        Mail::to($request->user())->send(new OrderShipped($user));
         // 회원가입 완료 로그인 페이지 이동
         return redirect()
                 ->route('users.login')
@@ -131,8 +160,6 @@ class UserController extends Controller
         $users = Users::find( $id ); 
         // $users = Users::find(Auth::User()->id);      // 권한으로 체크 security에서 이게 좋을 수 있음~! 121행과 같음 
         return view('useredit')->with('user',$users);
-        
-
         // return view('useredit');
     }
 
@@ -188,7 +215,7 @@ class UserController extends Controller
         foreach($arrKey as $val){
             $arrCheck[$val] = $chkList[$val]; 
         }
-        
+
         // return var_dump($request);
         $request->validate($arrCheck);
         //todo: password_flg =1 인 경우 0으로 바꿔줘야함 
@@ -197,7 +224,7 @@ class UserController extends Controller
                 $baseUsers->$val = Hash::make($request->$val);
                 continue;   // continue를 만나면 다음 코드를 넘어가고 루프시작 
             }
-            
+
             $baseUsers->$val = $request->$val;
         }
 
@@ -206,7 +233,7 @@ class UserController extends Controller
         }
         $baseUsers->save(); // update
 
-        
+
         Session::flush();
         Auth::logout();
         return redirect()->route('users.login');
@@ -253,7 +280,7 @@ class UserController extends Controller
         $baseUsers = Users::find(Auth::User()->id);
         // 요청된 패스워드와 데이터베이스의 패스워드가 일치할 경우 
         // user.edit으로 이동
-        
+
         if(!(Hash::check($request->password, $baseUsers->password))){
             return redirect()->back()->with('error','비밀번호를 틀리셨습니다.');
         }else{
@@ -294,6 +321,26 @@ class UserController extends Controller
         // var_dump($randompassword);
         return view('randompassword');
     }
-    // !회원정보 페이지에 비밀번호 입력하고 들어가기
+    
+
+    // function joinquery(Request $request){
+         // *쿼리를 직접 전달하는 방식 
+    //     DB::statement('drop table users');
+
+    //     //* SELECT 쿼리를 직접 전달하고 파라미터를 바인딩하는 호출 방식 
+    //     DB::select('select * from users where email = ?' ,[$request->email]);
+
+    //     //* 체이닝 방법을 사용하여 데이터 조회
+    //     DB::table('users')->get();
+
+    //     //* 다른 테이블과의 join구문을 체이닝으로 호출 
+    //     DB::table('users')->join('boards',function($join){
+    //         $join->on('users.id','=','boards.user_id')
+    //         ->where('조건');
+    //     })->get();
+    // }
+    // select,insert,update,delete를 써주는게 좋음 
+    // update, delete는 쿼리를 실행한 후 영향을 받은 레코드 개수를 반환함. 
+    
     
 }

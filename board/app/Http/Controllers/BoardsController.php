@@ -25,11 +25,9 @@ class BoardsController extends Controller
     {
         //! 로그인 체크 (로그인 안했을 경우 boards 페이지 들어오는 거 막음)
         // 페이지에 들어온 사람이 guest(비로그인)일 경우 true
-        if(auth()->guest()){
+        if( auth()->guest() ){
             return redirect()->route('users.login');
         }
-        // var_dump(session()->all());
-        // var_dump(session('id'));
         $result = Boards::select(['id','title','hits','created_at','updated_at'])->orderBy('hits','desc')->get();
         // $user = Users::select(['id','email','password','created_at','updated_at'])->where('id','=',session('id'))->get();
         return view('list')->with('data',$result);
@@ -103,9 +101,10 @@ class BoardsController extends Controller
         if(auth()->guest()){
             return redirect()->route('users.login');
         }
+
         $boards = Boards::find( $id ); //   기존 값 가져오고
-        $boards->hits++;    //  조회수 1 증가하고
-        $boards->save();    // 업데이트 완료
+        $boards->hits++;                //  조회수 1 증가하고
+        $boards->save();                // 업데이트 완료
 
         // Boards::find( $id ); // 예외가 발생할 시 false로 나오고
         // Boards::findOrFail($id) // 리턴이 오는게 아니라 예외처리해서 오류페이지가 뜨게한다
@@ -256,7 +255,7 @@ class BoardsController extends Controller
 
         //*2
         // 엘로퀀트 ORM을 사용하고 있기 때문에 softDelete기능 사용가능
-        Boards::destroy($id);
+        // Boards::destroy($id);
 
         //*3
         // delete , update insert에서 트랜잭션 해주어야함.
